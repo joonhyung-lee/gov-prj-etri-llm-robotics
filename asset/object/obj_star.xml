@@ -24,9 +24,9 @@
   </asset>
 
   <worldbody>
-    <body name="obj_star_purple" pos="1.2 0 0.8">
+    <body name="obj_star_green" pos="1.2 0 0.8">
       <freejoint/>
-      <geom mesh="obj_star" class="obj_star_visual" rgba="0.65 0.15 0.65 1"/>
+      <geom mesh="obj_star" class="obj_star_visual" rgba="0.15 0.65 0.15 1"/>
       <geom mesh="obj_star_collision_0" class="obj_star_collision"/>
       <geom mesh="obj_star_collision_1" class="obj_star_collision"/>
       <geom mesh="obj_star_collision_2" class="obj_star_collision"/>
@@ -60,7 +60,7 @@
 
     <body name="obj_star_blue" pos="1.2 0.2 0.8">
       <freejoint/>
-      <geom mesh="obj_star" class="obj_star_visual" rgba="0.25 0.25 0.75 1"/>
+      <geom mesh="obj_star" class="obj_star_visual" rgba="0.15 0.15 0.65 1"/>
       <geom mesh="obj_star_collision_0" class="obj_star_collision"/>
       <geom mesh="obj_star_collision_1" class="obj_star_collision"/>
       <geom mesh="obj_star_collision_2" class="obj_star_collision"/>

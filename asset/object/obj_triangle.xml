@@ -24,7 +24,7 @@
   </asset>
   <worldbody>
     <body name="obj_triangle_blue" pos="1.35 0.2 0.8" euler="0 0 1.57">
-      <geom mesh="obj_triangle" class="obj_triangle_visual" rgba="0.25 0.25 0.75 1"/>
+      <geom mesh="obj_triangle" class="obj_triangle_visual" rgba="0.15 0.15 0.65 1"/>
       <joint type="free"/>
       <geom mesh="obj_triangle_collision_0" class="obj_triangle_collision"/>
       <geom mesh="obj_triangle_collision_1" class="obj_triangle_collision"/>
@@ -57,8 +57,8 @@
       <geom mesh="obj_triangle_collision_11" class="obj_triangle_collision"/>
     </body>
 
-    <body name="obj_triangle_purple" pos="1.35 0. 0.8" euler="0 0 1.57">
-      <geom mesh="obj_triangle" class="obj_triangle_visual" rgba="0.65 0.15 0.65 1"/>
+    <body name="obj_triangle_green" pos="1.35 0. 0.8" euler="0 0 1.57">
+      <geom mesh="obj_triangle" class="obj_triangle_visual" rgba="0.15 0.65 0.15 1"/>
       <joint type="free"/>
       <geom mesh="obj_triangle_collision_0" class="obj_triangle_collision"/>
       <geom mesh="obj_triangle_collision_1" class="obj_triangle_collision"/>
