@@ -1,0 +1,21 @@
+<mujocoinclude>
+    <worldbody>
+        <!-- Square objects -->
+        <body name="obj_box_red_01" pos="0.0 0.0 1.0">
+            <joint type="free" />
+            <geom name="obj_box_red_01" fromto="0.0 0.0 0.06  0.0 0.0 0.0" size="0.03 0.03"
+                density="500" friction="1 0.005 0.0001" type="box" rgba="1 0 0.16 1" />
+        </body>
+        <body name="obj_box_green_01" pos="0.0 0.00 1.2">
+            <joint type="free" />
+            <geom name="obj_box_green_01" fromto="0.0 0.0 0.06  0.0 0.0 0.0" size="0.03 0.03"
+                density="500" friction="1 0.005 0.0001" type="box" rgba="0.36 1 0 1" />
+        </body>
+        <body name="obj_box_blue_01" pos="0.0 -0.00 1.4">
+            <joint type="free" />
+            <geom name="obj_box_blue_01" fromto="0.0 0.0 0.06  0.0 0.0 0.0" size="0.03 0.03"
+                density="500" friction="1 0.005 0.0001" type="box" rgba="0 0.46 1 1" />
+        </body>
+    </worldbody>
+
+</mujocoinclude>
