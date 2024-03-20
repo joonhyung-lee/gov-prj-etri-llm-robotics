@@ -1,0 +1,9 @@
+matplotlib
+mujoco
+mujoco-python-viewer
+numpy
+openai==1.13.3
+opencv-python
+rich
+scipy
+tenacity
