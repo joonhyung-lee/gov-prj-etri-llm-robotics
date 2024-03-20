@@ -2,8 +2,8 @@ import re
 from IPython.display import Markdown,display
 import math,time,os
 import numpy as np
-import shapely as sp # handle polygon
-from shapely.geometry import Polygon,LineString,Point # handle polygons
+# import shapely as sp # handle polygon
+# from shapely.geometry import Polygon,LineString,Point # handle polygons
 from scipy.spatial.distance import cdist
 import re
 from IPython.display import Markdown,display
@@ -252,36 +252,6 @@ def kernel_levse(X1,X2,L1,L2,hyp={'g':1,'l':1}):
     L = np.cos(np.pi/2.0*cdist(L1,L2,'cityblock'))
     return np.multiply(K,L)
 
-def is_point_in_polygon(point,polygon):
-    """
-        Is the point inside the polygon
-    """
-    if isinstance(point,np.ndarray):
-        point_check = Point(point)
-    else:
-        point_check = point
-    return sp.contains(polygon,point_check)
-
-def is_point_feasible(point,obs_list):
-    """
-        Is the point feasible w.r.t. obstacle list
-    """
-    result = is_point_in_polygon(point,obs_list) # is the point inside each obstacle?
-    if sum(result) == 0:
-        return True
-    else:
-        return False
-
-def is_point_to_point_connectable(point1,point2,obs_list):
-    """
-        Is the line connecting two points connectable
-    """
-    result = sp.intersects(LineString([point1,point2]),obs_list)
-    if sum(result) == 0:
-        return True
-    else:
-        return False
-    
 class TicTocClass(object):
     """
         Tic toc

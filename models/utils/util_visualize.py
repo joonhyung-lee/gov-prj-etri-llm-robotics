@@ -1,7 +1,6 @@
 import random
 import cv2
 import numpy as np
-import torch
 import matplotlib.pyplot as plt 
 from matplotlib.figure import Figure
 from mpl_toolkits.mplot3d import Axes3D
@@ -142,91 +141,10 @@ def show_point_cloud(point_cloud, axis=False, title='Point Cloud', xlabel='X-axi
     ax.set_zlabel(zlabel)
     plt.show()
 
-
-def show_point_clouds(point_clouds, axis=False, device='cuda'):
-    """visual a point cloud
-    Args:
-        point_cloud (np.ndarray): the coordinates of point cloud
-        axis (bool, optional): Hid the coordinate of the matplotlib. Defaults to False.
-    """
-    ax = plt.figure().add_subplot(projection='3d')
-    for idx, point_cloud in enumerate(point_clouds):
-        pcd_np = np.array(point_cloud)
-        pcd_torch = torch.from_numpy(pcd_np).permute([1,0]).unsqueeze(0).to(device)
-        ax.scatter(xs=pcd_torch.cpu().detach().numpy()[0, :, 0], ys=pcd_torch.cpu().detach().numpy()[0, :, 1], zs=pcd_torch.cpu().detach().numpy()[0, :, 2], s=5)
-    ax._axis3don = False
-    plt.show()
-
-def setup_seed(seed):
-    """
-    Set the random seed.
-    """
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
-    np.random.seed(seed)
-    random.seed(seed)
-    torch.backends.cudnn.deterministic = True
-
-
 # passthrough filter about specific axis
 def passthrough_filter(pcd, axis, interval):
     mask = (pcd[:, axis] > interval[0]) & (pcd[:, axis] < interval[1])
     return pcd[mask]
-
-def index_points(point_clouds, index):
-    """
-    Given a batch of tensor and index, select sub-tensor.
-
-    Input:
-        points: input points data, [B, N, C]
-        idx: sample index data, [B, N, k]
-    Return:
-        new_points:, indexed points data, [B, N, k, C]
-    """
-    device = point_clouds.device
-    batch_size = point_clouds.shape[0]
-    view_shape = list(index.shape)
-    view_shape[1:] = [1] * (len(view_shape) - 1)
-    repeat_shape = list(index.shape)
-    repeat_shape[0] = 1
-    batch_indices = torch.arange(batch_size, dtype=torch.long, device=device).view(view_shape).repeat(repeat_shape)
-    new_points = point_clouds[batch_indices, index, :]
-    return new_points
-
-
-def knn(x, k):
-    """
-    K nearest neighborhood.
-
-    Parameters
-    ----------
-        x: a tensor with size of (B, C, N)
-        k: the number of nearest neighborhoods
-    
-    Returns
-    -------
-        idx: indices of the k nearest neighborhoods with size of (B, N, k)
-    """
-    inner = -2 * torch.matmul(x.transpose(2, 1), x)  # (B, N, N)
-    xx = torch.sum(x ** 2, dim=1, keepdim=True)  # (B, 1, N)
-    pairwise_distance = -xx - inner - xx.transpose(2, 1)  # (B, 1, N), (B, N, N), (B, N, 1) -> (B, N, N)
- 
-    idx = pairwise_distance.topk(k=k, dim=-1)[1]   # (B, N, k)
-    return idx
-
-
-def to_one_hots(y, categories):
-    """
-    Encode the labels into one-hot coding.
-
-    :param y: labels for a batch data with size (B,)
-    :param categories: total number of kinds for the label in the dataset
-    :return: (B, categories)
-    """
-    y_ = torch.eye(categories)[y.data.cpu().numpy()]
-    if y.is_cuda:
-        y_ = y_.cuda()
-    return y_
 
 def euclidean_distance_3d(coord1, coord2):
     """Calculate the Euclidean distance between two points in 3D."""
@@ -467,10 +385,3 @@ def plot_to_image(fig, dpi=400):
 #     plt.title('Closest Object Pairs with Labels')
 #     plt.tight_layout()
 #     plt.show()
-
-if __name__ == '__main__':
-    pcs = torch.rand(32, 3, 1024)
-    knn_index = knn(pcs, 16)
-    print(knn_index.size())
-    knn_pcs = index_points(pcs.permute(0, 2, 1), knn_index)
-    print(knn_pcs.size())

@@ -32,16 +32,16 @@ args = parser.parse_args(args=[])
 
 #%%
 if args.model == 'gpt-4-vision-preview':
-    # model = GPT4VisionClass(key_path='../../key/rilab_key.txt', max_tokens=1024, temperature=0.95,
+    # model = GPT4VisionClass(key_path='../../key/my_key.txt', max_tokens=1024, temperature=0.95,
     model = GPT4VisionClass(key_path='../../key/my_key.txt', max_tokens=1024, temperature=0.95,
                             gpt_model="gpt-4-vision-preview", role_msg="You are a helpful agent with vision capabilities; do not respond to objects not depicted in images."
     )
 elif args.model == 'gpt-4':
-    set_openai_api_key_from_txt(key_path='../../key/rilab_key.txt')
+    set_openai_api_key_from_txt(key_path='../../key/my_key.txt')
     model = GPTchatClass(gpt_model='gpt-4',
                          role_msg='Your are a helpful assistant summarizing infromation and answering user queries.')
 elif args.model == 'gpt-3.5-turbo':
-    set_openai_api_key_from_txt(key_path='../../key/rilab_key.txt')
+    set_openai_api_key_from_txt(key_path='../../key/my_key.txt')
     model = GPTchatClass(gpt_model='gpt-3.5-turbo',
                          role_msg='Your are a helpful assistant summarizing infromation and answering user queries.')
 
@@ -143,7 +143,7 @@ for interaction_idx in range(args.num_interaction):
     # 2. System prompt: functions, object_names
     if interaction_idx == 0:
         print("\033[94m [System prompt: inform functions and object names] \033[00m")
-        model = GPT4VisionClass(key_path='../../key/rilab_key.txt', max_tokens=1024, temperature=0.95,
+        model = GPT4VisionClass(key_path='../../key/my_key.txt', max_tokens=1024, temperature=0.95,
         # model = GPT4VisionClass(key_path='../../key/my_key.txt', max_tokens=1024, temperature=0.95,
             gpt_model="gpt-4-vision-preview",
             role_msg="You are a helpful agent with vision capabilities; do not respond to objects not depicted in images."

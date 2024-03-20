@@ -98,7 +98,7 @@ class GPT4VisionClass:
             self, 
             gpt_model: str = "gpt-4-vision-preview",
             role_msg: str = "You are a helpful agent with vision capabilities; do not respond to objects not depicted in images.",
-            key_path='../key/rilab_key.txt', 
+            key_path='../key/my_key.txt', 
             max_tokens = 512, temperature = 0.9, n = 1, stop = [], VERBOSE=True,
             image_max_size:int = 512,
             ):
